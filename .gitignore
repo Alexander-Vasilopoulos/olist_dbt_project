@@ -2,6 +2,7 @@
 # these are the default directory names, adjust/add to fit your needs
 target/
 dbt_packages/
+models/example/
 logs/
 profiles.yml
 data/raw/*.csv
