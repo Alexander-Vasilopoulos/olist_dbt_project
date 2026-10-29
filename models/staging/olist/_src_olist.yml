@@ -2,6 +2,7 @@ version: 2
 
 sources:
   - name: olist
+    database: olist
     description: Raw Olist Brazilian e-commerce tables, loaded as-is from the Kaggle CSVs.
     schema: raw            # Snowflake: OLIST.RAW
 
