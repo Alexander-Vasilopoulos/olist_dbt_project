@@ -1,0 +1,14 @@
+# you shouldn't commit these into source control
+# these are the default directory names, adjust/add to fit your needs
+target/
+dbt_packages/
+models/example/
+logs/
+profiles.yml
+data/raw/*.csv
+.env
+.venv/
+__pycache__/
+*.p8
+*.pub
+
