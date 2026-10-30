@@ -7,6 +7,8 @@ into a tested star schema that feeds a Power BI report on delivery performance a
 
 ## Lineage
 
+![Lineage graph](images/lineage.png)
+
 ```
 raw CSVs -> staging (clean/rename, 1:1 with sources)
          -> intermediate (collapse to one row per order)
@@ -31,6 +33,8 @@ raw CSVs -> staging (clean/rename, 1:1 with sources)
 - Reconciliation: total revenue in `fct_orders` must equal total revenue in `fct_order_items`.
 - Sanity: no negative amounts.
 
+![Lineage graph](images/successful build.png)
+
 ## Run it
 
 **Option A: Snowflake**
@@ -45,7 +49,6 @@ raw CSVs -> staging (clean/rename, 1:1 with sources)
 
 ## Findings
 
-_Add 3-4 findings from your marts here (for example: how review scores change by delay bucket)._
 
 ## Limitations / next steps
 
