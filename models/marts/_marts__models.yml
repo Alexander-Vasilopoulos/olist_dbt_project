@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: One row per order with revenue, payment, review and delivery performance.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_unique_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_unique_id
+      - name: delay_bucket
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Not delivered', 'Early', 'On time', '1-3 days late', '4-7 days late', '8+ days late']
+
+  - name: fct_order_items
+    description: One row per order line item.
+    columns:
+      - name: order_item_key
+        data_tests: [unique, not_null]
+      - name: seller_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_id
+      - name: product_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+
+  - name: dim_customers
+    columns:
+      - name: customer_unique_id
+        data_tests: [unique, not_null]
+
+  - name: dim_sellers
+    columns:
+      - name: seller_id
+        data_tests: [unique, not_null]
+
+  - name: dim_products
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
