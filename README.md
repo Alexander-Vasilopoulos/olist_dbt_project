@@ -50,20 +50,18 @@ raw CSVs -> staging (clean/rename, 1:1 with sources)
 
 ## Findings
 
-- **Late deliveries hurt reviews.** Orders delivered early average 4.29 stars; orders
-  8+ days late average 1.70, about 2.6 stars lower, and the score falls at each step
-  (4.03 on time, 3.29 at 1-3 days late, 2.10 at 4-7 days late).
-- **Most orders arrive on time, but the tail is costly.** 6.8% of delivered orders
-  (6,535 of 96,476) arrive after the estimated date, and 2,863 of them (3.0%) are
-  more than a week late.
-- **Delays are concentrated in the Northeast.** Among states with 300+ delivered
-  orders, the highest late rates are AL (21.4%), MA (17.4%), SE (15.2%), PI (13.9%)
-  and CE (13.8%), roughly 2-3x the 6.8% overall rate.
-- **Revenue exposure:** R$ 985,954 (7.5% of delivered revenue) came from orders that
-  arrived late.
+- **Late deliveries hurt reviews:** orders delivered early average 4.29 stars, orders 8+ days late average 1.70.
+- **6.8% of delivered orders arrive late** (6,535 of 96,476), and they account for R$ 985,954 (7.5%) of delivered revenue.
+- **The Northeast has the worst delays:** AL (21.4%), MA (17.4%) and SE (15.2%) have late rates 2-3x the average.
+
+*Associations, not proof of cause. Queries are in `analyses/findings.sql`.*
+
+## Data quality
+
+- 547 orders have several reviews, so only the latest is kept per order.
+- A naive join to payments overstates revenue by about 4.5% (R$ 617K), so payments are aggregated per order first.
+- 8 orders are marked `delivered` without a delivery date, flagged by a warn-level test.
 
 ## Limitations / next steps
 
 - Geolocation table is not modelled.
-- No incremental models (the dataset is small and static).
-- Add a date dimension and CI that runs `dbt build` on every push.
