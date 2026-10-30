@@ -33,7 +33,7 @@ raw CSVs -> staging (clean/rename, 1:1 with sources)
 - Reconciliation: total revenue in `fct_orders` must equal total revenue in `fct_order_items`.
 - Sanity: no negative amounts.
 
-![Lineage graph](images/successful build.png)
+![Lineage graph](images/successfull build.png)
 
 ## Run it
 
