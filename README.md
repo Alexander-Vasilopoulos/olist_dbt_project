@@ -33,20 +33,18 @@ raw CSVs -> staging (clean/rename, 1:1 with sources)
 - Reconciliation: total revenue in `fct_orders` must equal total revenue in `fct_order_items`.
 - Sanity: no negative amounts.
 
-![Lineage graph](<images/successful build.png>)
+![Successful dbt build](<images/successful build.png>)
 
 
 ## Run it
 
-**Option A: Snowflake**
-1. Run `setup/snowflake_setup.sql` and load the CSVs into `OLIST.RAW`.
-2. `pip install dbt-snowflake`, copy `profiles.yml.example` to `~/.dbt/profiles.yml` and set the environment variables.
-3. `dbt build` then `dbt docs generate && dbt docs serve`.
+Built and run on Snowflake with dbt.
 
-**Option B: DuckDB (free, local)**
-1. `pip install dbt-duckdb`, copy `profiles.yml.example` to `~/.dbt/profiles.yml` and use `--target duckdb`.
-2. Put the 8 CSVs in `data/raw/` (git-ignored).
-3. `dbt build --target duckdb`.
+1. Run `setup/snowflake_setup.sql` and load the 8 CSVs into `OLIST.RAW`.
+2. `pip install dbt-snowflake` and configure your own Snowflake connection.
+3. `dbt build`, then `dbt docs generate`.
+
+
 
 ## Findings
 
@@ -54,7 +52,7 @@ raw CSVs -> staging (clean/rename, 1:1 with sources)
 - **6.8% of delivered orders arrive late** (6,535 of 96,476), and they account for R$ 985,954 (7.5%) of delivered revenue.
 - **The Northeast has the worst delays:** AL (21.4%), MA (17.4%) and SE (15.2%) have late rates 2-3x the average.
 
-*Associations, not proof of cause. Queries are in `analyses/findings.sql`.*
+Findings queries: `analyses/findings.sql`.
 
 ## Data quality
 
