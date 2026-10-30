@@ -27,6 +27,8 @@ raw CSVs -> staging (clean/rename, 1:1 with sources)
 | A few orders are `delivered` but have no delivery date | Reported by a warn-level test instead of failing the build |
 | Column typos (`product_name_lenght`) | Unused columns dropped in staging |
 
+![cte example](<images/cte with row number example.png>)
+
 ## Tests
 
 - Unique / not null on all primary keys, `relationships` between facts and dimensions, `accepted_values` on status, review score and delay bucket.
