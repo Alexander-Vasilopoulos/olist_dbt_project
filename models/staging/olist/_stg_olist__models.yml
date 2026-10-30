@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: stg_olist__customers
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: customer_unique_id
+        data_tests: [not_null]
+
+  - name: stg_olist__orders
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__customers')
+                field: customer_id
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [created, approved, invoiced, processing, shipped, delivered, unavailable, canceled]
+
+  - name: stg_olist__order_items
+    columns:
+      - name: order_item_key
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_olist__orders')
+                field: order_id
+      - name: price
+        data_tests: [not_null]
+
+  - name: stg_olist__order_payments
+    columns:
+      - name: payment_key
+        data_tests: [unique, not_null]
+
+  - name: stg_olist__order_reviews
+    description: One row per review. An order can have more than one review.
+    columns:
+      - name: review_score
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+
+  - name: stg_olist__products
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+
+  - name: stg_olist__sellers
+    columns:
+      - name: seller_id
+        data_tests: [unique, not_null]
+
+  - name: stg_olist__category_translation
+    columns:
+      - name: product_category_name
+        data_tests: [unique, not_null]
